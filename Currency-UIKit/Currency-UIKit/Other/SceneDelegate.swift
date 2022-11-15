@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let vc = ViewController()
+        let vc = CurrencyListViewController()
         window.rootViewController = UINavigationController(rootViewController: vc)
         window.makeKeyAndVisible()
         
