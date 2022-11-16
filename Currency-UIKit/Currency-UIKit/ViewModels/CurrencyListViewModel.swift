@@ -12,9 +12,9 @@ class CurrencyListViewModel {
     var currencyTable: [ExchangeRatesTable] = []
     
     var currencies: [CurrencyViewModel] = []
-    var pastCurrencies: [CurrencyViewModel] = []
     
-    func fetchPastCurrenciesForTable(table: String, daysAgoCount: Int) {
+    
+    func fetchPastCurrenciesForTable(table: String, daysAgoCount: Int, completion: @escaping ([CurrencyViewModel]?) -> Void) {
         
         APIManager.shared.fetchCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { [weak self] result in
             
@@ -24,36 +24,42 @@ class CurrencyListViewModel {
                 
                 self?.currencyTable = table
                 
-                self?.pastCurrencies = table[daysAgoCount - 1].rates.map {
+                var pastCurrencyData: [CurrencyViewModel] = []
+                var currentCurrencyData: [CurrencyViewModel] = []
+                
+                pastCurrencyData = table[daysAgoCount - 1].rates.map {
                     CurrencyViewModel(currency: $0)
                 }
                 
-                self?.currencies = table[0].rates.map {
+                currentCurrencyData = table[0].rates.map {
                     CurrencyViewModel(currency: $0)
                 }
                 
                 var index = 0
                 
-                self?.currencies.forEach({ [weak self] currency in
+                currentCurrencyData.forEach({ [weak self] currency in
                     
-                    let percentChange = self?.calculatePercentChange(current: currency.currency.mid, past: self?.pastCurrencies[index].currency.mid ?? 0)
+                    let percentChange = self?.calculatePercentChange(current: currency.currency.mid, past: pastCurrencyData[index].currency.mid )
                     
                     currency.percentChange = percentChange
                     
                     index += 1
                 })
 
-            case .failure(let error):  print(error)
-                
+                completion(currentCurrencyData)
+
+            case .failure(let error):
+                print(error)
+                completion(nil)
             }
         }
     }
     
-    func calculatePercentChange(current: Double, past: Double) -> String {
+    func calculatePercentChange(current: Double, past: Double) -> Double {
         
         let percentChange = (((past - current) / past) * 100).roundToTwoDecimalPlaces()
         
-        return "\(percentChange)%"
+        return percentChange
     }
     
 }
@@ -67,7 +73,7 @@ class CurrencyViewModel {
     }
     
     var name: String {
-        currency.currency
+        currency.currency.capitalized
     }
     
     var code: String {
@@ -78,6 +84,6 @@ class CurrencyViewModel {
         currency.mid
     }
     
-    var percentChange: String?
+    var percentChange: Double?
     
 }

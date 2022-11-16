@@ -17,6 +17,10 @@
 		AEF882B02923EE6E00F27D6E /* ExchangeRatesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882AF2923EE6E00F27D6E /* ExchangeRatesTable.swift */; };
 		AEF882B22923F6C200F27D6E /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B12923F6C200F27D6E /* CurrencyListViewModel.swift */; };
 		AEF882B42923FF2F00F27D6E /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B32923FF2F00F27D6E /* Double+Extensions.swift */; };
+		AEF882B62924281300F27D6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B52924281300F27D6E /* UIView+Extensions.swift */; };
+		AEF882B829247FC800F27D6E /* CurrencyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */; };
+		AEF882BC2924817A00F27D6E /* FlagCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BB2924817A00F27D6E /* FlagCellView.swift */; };
+		AEF882C0292491B100F27D6E /* PercentageChangeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		AEF882AF2923EE6E00F27D6E /* ExchangeRatesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesTable.swift; sourceTree = "<group>"; };
 		AEF882B12923F6C200F27D6E /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 		AEF882B32923FF2F00F27D6E /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		AEF882B52924281300F27D6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListTableViewCell.swift; sourceTree = "<group>"; };
+		AEF882BB2924817A00F27D6E /* FlagCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCellView.swift; sourceTree = "<group>"; };
+		AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageChangeCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF882B32923FF2F00F27D6E /* Double+Extensions.swift */,
+				AEF882B52924281300F27D6E /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -130,9 +139,28 @@
 		AEF882AA292004D800F27D6E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AEF882B92924814400F27D6E /* Cells */,
 				AEEB195A291C26CC00EA3E50 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AEF882B92924814400F27D6E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */,
+				AEF882BA2924814B00F27D6E /* CurrencyListCellViews */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AEF882BA2924814B00F27D6E /* CurrencyListCellViews */ = {
+			isa = PBXGroup;
+			children = (
+				AEF882BB2924817A00F27D6E /* FlagCellView.swift */,
+				AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */,
+			);
+			path = CurrencyListCellViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,10 +236,14 @@
 				AEF882B42923FF2F00F27D6E /* Double+Extensions.swift in Sources */,
 				AEEB1954291C26CB00EA3E50 /* CurrencyListViewController.swift in Sources */,
 				AEF882B02923EE6E00F27D6E /* ExchangeRatesTable.swift in Sources */,
+				AEF882B62924281300F27D6E /* UIView+Extensions.swift in Sources */,
 				AEEB1950291C26CB00EA3E50 /* AppDelegate.swift in Sources */,
 				AEF882AE2922C01A00F27D6E /* APIManager.swift in Sources */,
 				AEEB1952291C26CB00EA3E50 /* SceneDelegate.swift in Sources */,
+				AEF882BC2924817A00F27D6E /* FlagCellView.swift in Sources */,
+				AEF882C0292491B100F27D6E /* PercentageChangeCellView.swift in Sources */,
 				AEF882AC2920076800F27D6E /* Constants.swift in Sources */,
+				AEF882B829247FC800F27D6E /* CurrencyListTableViewCell.swift in Sources */,
 				AEF882B22923F6C200F27D6E /* CurrencyListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

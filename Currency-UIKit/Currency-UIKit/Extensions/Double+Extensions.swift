@@ -16,5 +16,13 @@ extension Double {
     
         return rounded
     }
+    
+    func roundToFourDecimalPlaces() -> Double {
+        
+        let double = self
+        let rounded = (double * 10000).rounded() / 10000
+    
+        return rounded
+    }
 
 }
