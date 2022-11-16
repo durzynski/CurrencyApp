@@ -27,11 +27,11 @@ class CurrencyListViewModel {
                 var pastCurrencyData: [CurrencyViewModel] = []
                 var currentCurrencyData: [CurrencyViewModel] = []
                 
-                pastCurrencyData = table[daysAgoCount - 1].rates.map {
+                pastCurrencyData = table[0].rates.map {
                     CurrencyViewModel(currency: $0)
                 }
                 
-                currentCurrencyData = table[0].rates.map {
+                currentCurrencyData = table[daysAgoCount - 1].rates.map {
                     CurrencyViewModel(currency: $0)
                 }
                 

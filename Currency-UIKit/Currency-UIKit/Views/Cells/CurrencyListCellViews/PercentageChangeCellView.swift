@@ -98,7 +98,7 @@ extension PercentageChangeCellView {
     
     public func setupPercentageChange(value: Double) {
         
-        if value > 0 {
+        if value < 0 {
             
             let color = UIColor.systemRed
             
@@ -106,9 +106,9 @@ extension PercentageChangeCellView {
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
-            percentageLabel.text = String(value) + "%"
+            percentageLabel.text = String(value * -1) + "%"
             percentageLabel.textColor = color
-        } else if value < 0 {
+        } else if value > 0 {
             
             let color = UIColor.systemGreen
             
@@ -116,7 +116,7 @@ extension PercentageChangeCellView {
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
-            percentageLabel.text = String(value * -1) + "%"
+            percentageLabel.text = String(value) + "%"
             percentageLabel.textColor = color
         } else {
             
