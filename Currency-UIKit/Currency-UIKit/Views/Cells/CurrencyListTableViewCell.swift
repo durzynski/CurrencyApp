@@ -11,7 +11,7 @@ class CurrencyListTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     
-    static let identifier = String(describing: CurrencyListTableViewCell.self)
+    static let identifier = "CurrencyListTableViewCell"
     
     static let preferredHeight = CGFloat(100)
     

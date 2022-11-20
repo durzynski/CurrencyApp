@@ -59,6 +59,7 @@ class CurrencyListViewController: UIViewController {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(CurrencyListTableViewCell.self, forCellReuseIdentifier: CurrencyListTableViewCell.identifier)
+        table.register(SkeletonCell.self, forCellReuseIdentifier: SkeletonCell.identifier)
         table.backgroundColor = .clear
         
         return table
@@ -162,7 +163,13 @@ extension CurrencyListViewController {
         
         self.currencyListViewModel.fetchPastCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { [weak self] result in
             
-            self?.currencyListViewModel.currencies = result ?? []
+            if let result = result {
+                self?.currencyListViewModel.currencies = result
+            } else {
+                self?.presentErrorAlert {
+                    self?.fetchCurrenciesData(table: table, daysAgoCount: daysAgoCount, pulledToRefresh: pulledToRefresh)
+                }
+            }
 
             DispatchQueue.main.async {
                 pulledToRefresh ? self?.refreshControl.endRefreshing() : self?.activityIndicator.stopAnimating()
@@ -185,23 +192,44 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencyListViewModel.currencies.count
+        
+        if currencyListViewModel.currencies.count == 0 {
+            return 6
+        } else {
+            return currencyListViewModel.currencies.count
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyListTableViewCell.identifier, for: indexPath) as? CurrencyListTableViewCell else {
-            fatalError()
+        
+        if currencyListViewModel.currencies.count == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SkeletonCell.identifier, for: indexPath) as? SkeletonCell else {
+                fatalError()
+            }
+            
+            return cell
+        } else {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyListTableViewCell.identifier, for: indexPath) as? CurrencyListTableViewCell else {
+                fatalError()
+            }
+            
+            let viewModel = currencyListViewModel.currencies[indexPath.row]
+            
+            cell.configure(with: viewModel)
+            
+            return cell
         }
-        
-        let viewModel = currencyListViewModel.currencies[indexPath.row]
-        
-        cell.configure(with: viewModel)
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        CurrencyListTableViewCell.preferredHeight
+        if currencyListViewModel.currencies.count == 0 {
+            return SkeletonCell.preferredHeight
+        } else {
+            return CurrencyListTableViewCell.preferredHeight
+        }
     }
     
 }
