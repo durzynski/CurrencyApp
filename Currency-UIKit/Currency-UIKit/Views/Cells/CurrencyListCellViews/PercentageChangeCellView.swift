@@ -126,7 +126,7 @@ extension PercentageChangeCellView {
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
-            percentageLabel.text = String(value) + "%"
+            percentageLabel.text = "0.0%"
             percentageLabel.textColor = color
         }
         

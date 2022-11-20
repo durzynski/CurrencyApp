@@ -64,13 +64,24 @@ class CurrencyListViewController: UIViewController {
         return table
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .white
+        indicator.backgroundColor = .systemGray.withAlphaComponent(0.2)
+        indicator.layer.cornerRadius = 10
+        indicator.hidesWhenStopped = true
+        indicator.style = .medium
+        
+        return indicator
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         fetchCurrenciesData(table: "a", daysAgoCount: 7)
-        
         
         setupUI()
         setupNavigation()
@@ -89,7 +100,7 @@ extension CurrencyListViewController {
     func setupUI() {
         
         view.backgroundColor = Colors.appBackgound
-        view.addSubviews([titleLabel, searchTextField, tableTitleLabel, currencyListTableView])
+        view.addSubviews([activityIndicator, titleLabel, searchTextField, tableTitleLabel, currencyListTableView])
 
         setupConstraints()
     }
@@ -112,17 +123,26 @@ extension CurrencyListViewController {
             currencyListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             currencyListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             currencyListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor),
+            
         ])
         
     }
     
     private func fetchCurrenciesData(table: String, daysAgoCount: Int) {
         
+        activityIndicator.startAnimating()
+        
         self.currencyListViewModel.fetchPastCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { [weak self] result in
             
             self?.currencyListViewModel.currencies = result ?? []
-            
+
             DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
                 self?.currencyListTableView.reloadData()
             }
         }
