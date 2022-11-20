@@ -76,16 +76,19 @@ class CurrencyListViewController: UIViewController {
         return indicator
     }()
     
+    private let refreshControl = UIRefreshControl()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         fetchCurrenciesData(table: "a", daysAgoCount: 7)
         
         setupUI()
         setupNavigation()
         setupTableDelegates()
+        setupActions()
     }
 }
 
@@ -101,7 +104,7 @@ extension CurrencyListViewController {
         
         view.backgroundColor = Colors.appBackgound
         view.addSubviews([activityIndicator, titleLabel, searchTextField, tableTitleLabel, currencyListTableView])
-
+        
         setupConstraints()
     }
     
@@ -133,16 +136,36 @@ extension CurrencyListViewController {
         
     }
     
-    private func fetchCurrenciesData(table: String, daysAgoCount: Int) {
+
+    
+}
+
+//MARK: - Actions
+
+extension CurrencyListViewController {
+    
+    private func setupActions() {
+
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
-        activityIndicator.startAnimating()
+    }
+
+    @objc func refreshData() {
+        
+        fetchCurrenciesData(table: "a", daysAgoCount: 7, pulledToRefresh: true)
+        
+    }
+    
+    private func fetchCurrenciesData(table: String, daysAgoCount: Int, pulledToRefresh: Bool = false) {
+
+        pulledToRefresh ? refreshControl.beginRefreshing() : activityIndicator.startAnimating()
         
         self.currencyListViewModel.fetchPastCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { [weak self] result in
             
             self?.currencyListViewModel.currencies = result ?? []
 
             DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
+                pulledToRefresh ? self?.refreshControl.endRefreshing() : self?.activityIndicator.stopAnimating()
                 self?.currencyListTableView.reloadData()
             }
         }
@@ -158,6 +181,7 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
     func setupTableDelegates() {
         currencyListTableView.dataSource = self
         currencyListTableView.delegate = self
+        currencyListTableView.refreshControl = refreshControl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
