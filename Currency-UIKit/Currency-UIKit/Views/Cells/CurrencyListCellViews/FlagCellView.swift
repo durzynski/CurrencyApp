@@ -28,7 +28,8 @@ class FlagCellView: UIView {
         view.image = UIImage()
         view.backgroundColor = .systemGray5
         view.layer.cornerRadius = 15
-
+        view.layer.masksToBounds = true
+        
         return view
     }()
 
@@ -82,8 +83,7 @@ extension FlagCellView {
     
     public func setupFlagImage(flagName: String) {
         
-        //flagImageView.image = UIImage(named: flagName)
-        
+        flagImageView.image = UIImage(named: "\(flagName).svg") ?? UIImage()
     }
     
 }

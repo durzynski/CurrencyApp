@@ -116,7 +116,7 @@ extension CurrencyListTableViewCell {
     
     public func configure(with viewModel: CurrencyViewModel) {
         
-        flagCellView.setupFlagImage(flagName: "")
+        flagCellView.setupFlagImage(flagName: String(viewModel.code.dropLast().lowercased()))
         
         codeLabel.text = viewModel.code
         nameLabel.text = viewModel.name
