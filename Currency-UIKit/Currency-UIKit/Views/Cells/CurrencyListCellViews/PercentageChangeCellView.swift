@@ -43,6 +43,7 @@ class PercentageChangeCellView: UIView {
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()

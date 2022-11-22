@@ -53,6 +53,8 @@ class CurrencyListTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
+        
         return label
     }()
     

@@ -12,7 +12,10 @@ class CurrencyListViewModel {
     var currencyTable: [ExchangeRatesTable] = []
     
     var currencies: [CurrencyViewModel] = []
+    var filteredCurrencies: [CurrencyViewModel] = []
     
+    let tables = ["A", "B"]
+    var currentTable: String = "A"
     
     func fetchPastCurrenciesForTable(table: String, daysAgoCount: Int, completion: @escaping ([CurrencyViewModel]?) -> Void) {
         

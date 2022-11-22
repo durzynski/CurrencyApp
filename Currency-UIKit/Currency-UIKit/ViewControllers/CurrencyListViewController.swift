@@ -13,17 +13,10 @@ class CurrencyListViewController: UIViewController {
     
     private let currencyListViewModel = CurrencyListViewModel()
     
+    private var isSearching: Bool = false
     //MARK: - UI Elements
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 32, weight: .bold)
-        label.text = K.appTitle
-        label.textColor = Colors.neon
-        
-        return label
-    }()
+    private var tablePicker = UISegmentedControl()
     
     private let searchTextField: UITextField = {
         let textField = UITextField()
@@ -69,7 +62,7 @@ class CurrencyListViewController: UIViewController {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.color = .white
-        indicator.backgroundColor = .systemGray.withAlphaComponent(0.2)
+        indicator.backgroundColor = .systemGray.withAlphaComponent(0.5)
         indicator.layer.cornerRadius = 10
         indicator.hidesWhenStopped = true
         indicator.style = .medium
@@ -84,11 +77,12 @@ class CurrencyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchCurrenciesData(table: "a", daysAgoCount: 7)
+        fetchCurrenciesData(table: currencyListViewModel.currentTable, daysAgoCount: 7)
         
         setupUI()
         setupNavigation()
         setupTableDelegates()
+        setupTextFieldDelegate()
         setupActions()
     }
 }
@@ -103,31 +97,35 @@ extension CurrencyListViewController {
     
     func setupUI() {
         
-        view.backgroundColor = Colors.appBackgound
-        view.addSubviews([activityIndicator, titleLabel, searchTextField, tableTitleLabel, currencyListTableView])
+        setupSegmentedControl()
         
+        view.backgroundColor = Colors.appBackgound
+        view.addSubviews([searchTextField, tablePicker, tableTitleLabel, currencyListTableView, activityIndicator])
+
         setupConstraints()
     }
     
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tablePicker.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            tablePicker.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: tablePicker.trailingAnchor, multiplier: 2),
+            tablePicker.heightAnchor.constraint(equalToConstant: 35),
             
-            searchTextField.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 3),
+            searchTextField.topAnchor.constraint(equalToSystemSpacingBelow: tablePicker.bottomAnchor, multiplier: 2),
             searchTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 2),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: searchTextField.trailingAnchor, multiplier: 2),
             searchTextField.heightAnchor.constraint(equalToConstant: 65),
-            
+
             tableTitleLabel.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor),
             tableTitleLabel.topAnchor.constraint(equalToSystemSpacingBelow: searchTextField.bottomAnchor, multiplier: 3),
-            
+
             currencyListTableView.topAnchor.constraint(equalToSystemSpacingBelow: tableTitleLabel.bottomAnchor, multiplier: 1),
             currencyListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             currencyListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            currencyListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        
+            currencyListTableView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor),
+
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.widthAnchor.constraint(equalToConstant: 50),
@@ -137,7 +135,14 @@ extension CurrencyListViewController {
         
     }
     
-
+    func setupSegmentedControl() {
+        
+        tablePicker = UISegmentedControl(items: currencyListViewModel.tables)
+        tablePicker.translatesAutoresizingMaskIntoConstraints = false
+        tablePicker.selectedSegmentIndex = 0
+        tablePicker.addTarget(self, action: #selector(changeTable), for: .valueChanged)
+        
+    }
     
 }
 
@@ -149,11 +154,34 @@ extension CurrencyListViewController {
 
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
+        tablePicker = UISegmentedControl(items: currencyListViewModel.tables)
+        
+        tablePicker.addTarget(self, action: #selector(changeTable(_:)), for: .valueChanged)
+        tablePicker.backgroundColor = .red
+
+    }
+    
+    @objc func changeTable(_ sender: UISegmentedControl) {
+        
+        
+        
+        switch sender.selectedSegmentIndex {
+        case 0: currencyListViewModel.currentTable = "A"
+            fetchCurrenciesData(table: currencyListViewModel.currentTable, daysAgoCount: 7)
+            
+        case 1: currencyListViewModel.currentTable = "B"
+            fetchCurrenciesData(table: currencyListViewModel.currentTable, daysAgoCount: 7)
+            
+        default: currencyListViewModel.currentTable = "A"
+            fetchCurrenciesData(table: currencyListViewModel.currentTable, daysAgoCount: 7)
+            
+        }
+        
     }
 
     @objc func refreshData() {
         
-        fetchCurrenciesData(table: "a", daysAgoCount: 7, pulledToRefresh: true)
+        fetchCurrenciesData(table: currencyListViewModel.currentTable, daysAgoCount: 7, pulledToRefresh: true)
         
     }
     
@@ -195,11 +223,11 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         
         if currencyListViewModel.currencies.count == 0 {
             return 6
+        } else if isSearching {
+            return currencyListViewModel.filteredCurrencies.count
         } else {
             return currencyListViewModel.currencies.count
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -208,6 +236,16 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SkeletonCell.identifier, for: indexPath) as? SkeletonCell else {
                 fatalError()
             }
+            
+            return cell
+        } else if isSearching {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CurrencyListTableViewCell.identifier, for: indexPath) as? CurrencyListTableViewCell else {
+                fatalError()
+            }
+            
+            let viewModel = currencyListViewModel.filteredCurrencies[indexPath.row]
+            
+            cell.configure(with: viewModel)
             
             return cell
         } else {
@@ -234,4 +272,61 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
     
 }
 
+//MARK: - TextField Delegate
+
+extension CurrencyListViewController: UITextFieldDelegate {
+    
+    private func setupTextFieldDelegate() {
+        searchTextField.delegate = self
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let searchtext = searchTextField.text! + string
+        
+        if searchtext == "" {
+            isSearching = false
+            
+            self.currencyListTableView.reloadData()
+        } else {
+            isSearching = true
+            
+            currencyListViewModel.filteredCurrencies = currencyListViewModel.currencies.filter({ result in
+                
+                let withCode = result.code.lowercased().contains(searchtext.lowercased().trimmingCharacters(in: .whitespaces))
+                
+                let withName = result.name.lowercased().contains(searchtext.lowercased().trimmingCharacters(in: .whitespaces))
+
+                if withCode != false {
+                    return withCode
+                } else {
+                    return withName
+                }
+
+            })
+            
+            self.currencyListTableView.reloadData()
+        }
+
+        return true
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        searchTextField.text = ""
+        searchTextField.resignFirstResponder()
+        
+        return true
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        isSearching = false
+
+        self.currencyListTableView.reloadData()
+    }
+    
+    
+}
 
