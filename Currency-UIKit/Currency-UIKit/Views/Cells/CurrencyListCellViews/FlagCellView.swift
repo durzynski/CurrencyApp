@@ -83,7 +83,7 @@ extension FlagCellView {
     
     public func setupFlagImage(flagName: String) {
         
-        flagImageView.image = UIImage(named: "\(flagName).svg") ?? UIImage()
+        flagImageView.image = UIImage(named: flagName) ?? UIImage()
     }
     
 }

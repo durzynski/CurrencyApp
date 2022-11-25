@@ -270,6 +270,17 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if currencyListViewModel.currencies.count != 0 {
+            let viewModel = currencyListViewModel.currencies[indexPath.row]
+            let vc = CurrencyDetailsViewController(viewModel: viewModel)
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 
 //MARK: - TextField Delegate

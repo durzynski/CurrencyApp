@@ -87,6 +87,16 @@ class CurrencyViewModel {
         currency.mid
     }
     
+    var flagName: String {
+        
+        let lowercased = currency.code.lowercased()
+        let dropLast = lowercased.dropLast()
+        let svg = dropLast + ".svg"
+        
+        return String(svg)
+        
+    }
+    
     var percentChange: Double?
     
 }
