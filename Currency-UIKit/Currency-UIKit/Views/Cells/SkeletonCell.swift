@@ -17,7 +17,7 @@ class SkeletonCell: UITableViewCell {
 
     //MARK: - UI Elements
     
-    private let flagCellView = FlagCellView()
+    private let flagCellView = FlagView()
     
     private let flagLayer = CAGradientLayer()
     
@@ -64,7 +64,7 @@ class SkeletonCell: UITableViewCell {
     
     private let valueLabelLayer = CAGradientLayer()
     
-    private let percentageChangeView = PercentageChangeCellView()
+    private let percentageChangeView = PercentageChangeView()
     
     private let percentageViewLayer = CAGradientLayer()
     

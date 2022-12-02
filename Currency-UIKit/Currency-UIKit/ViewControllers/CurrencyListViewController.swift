@@ -275,7 +275,7 @@ extension CurrencyListViewController: UITableViewDelegate, UITableViewDataSource
         
         if currencyListViewModel.currencies.count != 0 {
             let viewModel = currencyListViewModel.currencies[indexPath.row]
-            let vc = CurrencyDetailsViewController(viewModel: viewModel)
+            let vc = CurrencyDetailsViewController(table: currencyListViewModel.currentTable, viewModel: viewModel)
             
             navigationController?.pushViewController(vc, animated: true)
         }

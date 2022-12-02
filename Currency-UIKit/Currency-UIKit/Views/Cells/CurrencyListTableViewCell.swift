@@ -17,7 +17,7 @@ class CurrencyListTableViewCell: UITableViewCell {
     
     //MARK: - UI Elements
     
-    private let flagCellView = FlagCellView()
+    private let flagCellView = FlagView()
     
     private let labelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -58,7 +58,7 @@ class CurrencyListTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let percentageChangeView = PercentageChangeCellView()
+    private let percentageChangeView = PercentageChangeView()
     
     //MARK: - Init
     

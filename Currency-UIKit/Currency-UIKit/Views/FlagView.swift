@@ -1,5 +1,5 @@
 //
-//  FlagCellView.swift
+//  FlagView.swift
 //  Currency-UIKit
 //
 //  Created by Damian Durzyński on 16/11/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FlagCellView: UIView {
+class FlagView: UIView {
     
     //MARK: - UI Elements
     
@@ -51,7 +51,7 @@ class FlagCellView: UIView {
 
 //MARK: - Configure UI
 
-extension FlagCellView {
+extension FlagView {
     
     private func setupUI() {
         

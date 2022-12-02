@@ -1,5 +1,5 @@
 //
-//  PercentageChangeCellView.swift
+//  PercentageChangeView.swift
 //  Currency-UIKit
 //
 //  Created by Damian Durzyński on 16/11/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PercentageChangeCellView: UIView {
+class PercentageChangeView: UIView {
     
     //MARK: - UI Elements
     
@@ -65,7 +65,7 @@ class PercentageChangeCellView: UIView {
 
 //MARK: - Configure UI
 
-extension PercentageChangeCellView {
+extension PercentageChangeView {
     
     private func setupUI() {
         
@@ -86,8 +86,8 @@ extension PercentageChangeCellView {
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 36),
-            containerView.widthAnchor.constraint(equalToConstant: 80),
+            containerView.heightAnchor.constraint(equalToConstant: 40),
+            containerView.widthAnchor.constraint(equalToConstant: 90),
             
             percentageChangeStackView.topAnchor.constraint(equalToSystemSpacingBelow: containerView.topAnchor, multiplier: 1),
             percentageChangeStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: containerView.leadingAnchor, multiplier: 1),

@@ -40,9 +40,9 @@ class CurrencyListViewModel {
                 
                 var index = 0
                 
-                currentCurrencyData.forEach({ [weak self] currency in
+                currentCurrencyData.forEach({ currency in
                     
-                    let percentChange = self?.calculatePercentChange(current: currency.currency.mid, past: pastCurrencyData[index].currency.mid )
+                    let percentChange = Double().calculatePercentChange(current: currency.currency.mid, past: pastCurrencyData[index].currency.mid )
                     
                     currency.percentChange = percentChange
                     
@@ -58,12 +58,7 @@ class CurrencyListViewModel {
         }
     }
     
-    func calculatePercentChange(current: Double, past: Double) -> Double {
-        
-        let percentChange = (((past - current) / past) * 100).roundToTwoDecimalPlaces()
-        
-        return percentChange
-    }
+
     
 }
 

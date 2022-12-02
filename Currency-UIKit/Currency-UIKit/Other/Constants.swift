@@ -12,7 +12,7 @@ struct K  {
     // API
     
     static let apiExchangeRatesForTableURL = "https://api.nbp.pl/api/exchangerates/tables/"
-    
+    static let urlForCurrencyRates = "https://api.nbp.pl/api/exchangerates/rates/"
     // CurrencyListVC
     
     static let appTitle = "Currencio"

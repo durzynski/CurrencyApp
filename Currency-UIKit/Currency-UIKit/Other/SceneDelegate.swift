@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let vc = CurrencyListViewController()
         window.rootViewController = UINavigationController(rootViewController: vc)
+        window.overrideUserInterfaceStyle = .dark
         window.makeKeyAndVisible()
         
         self.window = window

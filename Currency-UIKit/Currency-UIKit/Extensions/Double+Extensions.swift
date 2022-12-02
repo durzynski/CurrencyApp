@@ -24,5 +24,12 @@ extension Double {
     
         return rounded
     }
+    
+    func calculatePercentChange(current: Double, past: Double) -> Double {
+        
+        let percentChange = (((past - current) / past) * 100).roundToTwoDecimalPlaces()
+        
+        return percentChange
+    }
 
 }

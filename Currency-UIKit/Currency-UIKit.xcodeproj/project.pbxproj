@@ -10,6 +10,10 @@
 		AE346639292A8C580075CA7E /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE346638292A8C580075CA7E /* UIViewController+Extensions.swift */; };
 		AE34663B292A962F0075CA7E /* SkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE34663A292A962F0075CA7E /* SkeletonCell.swift */; };
 		AE34663D292FB3CA0075CA7E /* CurrencyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE34663C292FB3CA0075CA7E /* CurrencyDetailsViewController.swift */; };
+		AE7C03DD2934E4B6002172B6 /* CurrencyChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7C03DC2934E4B6002172B6 /* CurrencyChartViewModel.swift */; };
+		AE7C03DF2934E865002172B6 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7C03DE2934E864002172B6 /* Chart.swift */; };
+		AE7C03E729350259002172B6 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7C03E629350259002172B6 /* BalloonMarker.swift */; };
+		AE7C03E92935257F002172B6 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7C03E82935257F002172B6 /* ChartView.swift */; };
 		AEEB1950291C26CB00EA3E50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB194F291C26CB00EA3E50 /* AppDelegate.swift */; };
 		AEEB1952291C26CB00EA3E50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1951291C26CB00EA3E50 /* SceneDelegate.swift */; };
 		AEEB1954291C26CB00EA3E50 /* CurrencyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1953291C26CB00EA3E50 /* CurrencyListViewController.swift */; };
@@ -22,14 +26,22 @@
 		AEF882B42923FF2F00F27D6E /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B32923FF2F00F27D6E /* Double+Extensions.swift */; };
 		AEF882B62924281300F27D6E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B52924281300F27D6E /* UIView+Extensions.swift */; };
 		AEF882B829247FC800F27D6E /* CurrencyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */; };
-		AEF882BC2924817A00F27D6E /* FlagCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BB2924817A00F27D6E /* FlagCellView.swift */; };
-		AEF882C0292491B100F27D6E /* PercentageChangeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */; };
+		AEF882BC2924817A00F27D6E /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BB2924817A00F27D6E /* FlagView.swift */; };
+		AEF882C0292491B100F27D6E /* PercentageChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF882BF292491B100F27D6E /* PercentageChangeView.swift */; };
+		B7ECEF85A9D398D12B2CC143 /* Pods_Currency_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2B06A096A57B680EE7F11A /* Pods_Currency_UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2ECB8812C5E6CAE9A9019265 /* Pods-Currency-UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency-UIKit.release.xcconfig"; path = "Target Support Files/Pods-Currency-UIKit/Pods-Currency-UIKit.release.xcconfig"; sourceTree = "<group>"; };
+		3D2B06A096A57B680EE7F11A /* Pods_Currency_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Currency_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63290B37284BBA13B9E37586 /* Pods-Currency-UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currency-UIKit.debug.xcconfig"; path = "Target Support Files/Pods-Currency-UIKit/Pods-Currency-UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		AE346638292A8C580075CA7E /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		AE34663A292A962F0075CA7E /* SkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCell.swift; sourceTree = "<group>"; };
 		AE34663C292FB3CA0075CA7E /* CurrencyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetailsViewController.swift; sourceTree = "<group>"; };
+		AE7C03DC2934E4B6002172B6 /* CurrencyChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChartViewModel.swift; sourceTree = "<group>"; };
+		AE7C03DE2934E864002172B6 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		AE7C03E629350259002172B6 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		AE7C03E82935257F002172B6 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		AEEB194C291C26CB00EA3E50 /* Currency-UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Currency-UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEB194F291C26CB00EA3E50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEEB1951291C26CB00EA3E50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,8 +56,8 @@
 		AEF882B32923FF2F00F27D6E /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		AEF882B52924281300F27D6E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListTableViewCell.swift; sourceTree = "<group>"; };
-		AEF882BB2924817A00F27D6E /* FlagCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCellView.swift; sourceTree = "<group>"; };
-		AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageChangeCellView.swift; sourceTree = "<group>"; };
+		AEF882BB2924817A00F27D6E /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
+		AEF882BF292491B100F27D6E /* PercentageChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageChangeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7ECEF85A9D398D12B2CC143 /* Pods_Currency_UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +77,8 @@
 			children = (
 				AEEB194E291C26CB00EA3E50 /* Currency-UIKit */,
 				AEEB194D291C26CB00EA3E50 /* Products */,
+				D5913D6B3F2D95835F7CACE2 /* Pods */,
+				F7DF6F4C3A9A39073582EB71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF882AF2923EE6E00F27D6E /* ExchangeRatesTable.swift */,
+				AE7C03DE2934E864002172B6 /* Chart.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF882B12923F6C200F27D6E /* CurrencyListViewModel.swift */,
+				AE7C03DC2934E4B6002172B6 /* CurrencyChartViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -147,6 +164,10 @@
 		AEF882AA292004D800F27D6E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AE7C03E82935257F002172B6 /* ChartView.swift */,
+				AEF882BB2924817A00F27D6E /* FlagView.swift */,
+				AEF882BF292491B100F27D6E /* PercentageChangeView.swift */,
+				AE7C03E629350259002172B6 /* BalloonMarker.swift */,
 				AEF882B92924814400F27D6E /* Cells */,
 				AEEB195A291C26CC00EA3E50 /* LaunchScreen.storyboard */,
 			);
@@ -158,18 +179,25 @@
 			children = (
 				AEF882B729247FC800F27D6E /* CurrencyListTableViewCell.swift */,
 				AE34663A292A962F0075CA7E /* SkeletonCell.swift */,
-				AEF882BA2924814B00F27D6E /* CurrencyListCellViews */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		AEF882BA2924814B00F27D6E /* CurrencyListCellViews */ = {
+		D5913D6B3F2D95835F7CACE2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AEF882BB2924817A00F27D6E /* FlagCellView.swift */,
-				AEF882BF292491B100F27D6E /* PercentageChangeCellView.swift */,
+				63290B37284BBA13B9E37586 /* Pods-Currency-UIKit.debug.xcconfig */,
+				2ECB8812C5E6CAE9A9019265 /* Pods-Currency-UIKit.release.xcconfig */,
 			);
-			path = CurrencyListCellViews;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F7DF6F4C3A9A39073582EB71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D2B06A096A57B680EE7F11A /* Pods_Currency_UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEEB1960291C26CC00EA3E50 /* Build configuration list for PBXNativeTarget "Currency-UIKit" */;
 			buildPhases = (
+				34E1AAD5A62E21D2B1AB6866 /* [CP] Check Pods Manifest.lock */,
 				AEEB1948291C26CB00EA3E50 /* Sources */,
 				AEEB1949291C26CB00EA3E50 /* Frameworks */,
 				AEEB194A291C26CB00EA3E50 /* Resources */,
+				052D0ED1F6A352C3E6FE6425 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -237,23 +267,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		052D0ED1F6A352C3E6FE6425 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Currency-UIKit/Pods-Currency-UIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Currency-UIKit/Pods-Currency-UIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Currency-UIKit/Pods-Currency-UIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		34E1AAD5A62E21D2B1AB6866 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Currency-UIKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AEEB1948291C26CB00EA3E50 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7C03DD2934E4B6002172B6 /* CurrencyChartViewModel.swift in Sources */,
 				AEF882B42923FF2F00F27D6E /* Double+Extensions.swift in Sources */,
 				AEEB1954291C26CB00EA3E50 /* CurrencyListViewController.swift in Sources */,
+				AE7C03E92935257F002172B6 /* ChartView.swift in Sources */,
 				AEF882B02923EE6E00F27D6E /* ExchangeRatesTable.swift in Sources */,
 				AE34663D292FB3CA0075CA7E /* CurrencyDetailsViewController.swift in Sources */,
 				AEF882B62924281300F27D6E /* UIView+Extensions.swift in Sources */,
 				AEEB1950291C26CB00EA3E50 /* AppDelegate.swift in Sources */,
+				AE7C03E729350259002172B6 /* BalloonMarker.swift in Sources */,
 				AEF882AE2922C01A00F27D6E /* APIManager.swift in Sources */,
 				AEEB1952291C26CB00EA3E50 /* SceneDelegate.swift in Sources */,
 				AE346639292A8C580075CA7E /* UIViewController+Extensions.swift in Sources */,
 				AE34663B292A962F0075CA7E /* SkeletonCell.swift in Sources */,
-				AEF882BC2924817A00F27D6E /* FlagCellView.swift in Sources */,
-				AEF882C0292491B100F27D6E /* PercentageChangeCellView.swift in Sources */,
+				AE7C03DF2934E865002172B6 /* Chart.swift in Sources */,
+				AEF882BC2924817A00F27D6E /* FlagView.swift in Sources */,
+				AEF882C0292491B100F27D6E /* PercentageChangeView.swift in Sources */,
 				AEF882AC2920076800F27D6E /* Constants.swift in Sources */,
 				AEF882B829247FC800F27D6E /* CurrencyListTableViewCell.swift in Sources */,
 				AEF882B22923F6C200F27D6E /* CurrencyListViewModel.swift in Sources */,
@@ -390,6 +466,7 @@
 		};
 		AEEB1961291C26CC00EA3E50 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63290B37284BBA13B9E37586 /* Pods-Currency-UIKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -400,8 +477,9 @@
 				INFOPLIST_FILE = "Currency-UIKit/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -418,6 +496,7 @@
 		};
 		AEEB1962291C26CC00EA3E50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ECB8812C5E6CAE9A9019265 /* Pods-Currency-UIKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -428,8 +507,9 @@
 				INFOPLIST_FILE = "Currency-UIKit/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

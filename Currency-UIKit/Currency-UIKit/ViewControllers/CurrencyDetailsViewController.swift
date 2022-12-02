@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Charts
 
 class CurrencyDetailsViewController: UIViewController {
     
     private let currencyViewModel: CurrencyViewModel
+    private let chartViewModel: CurrencyChartViewModel
     
     //MARK: - Properties
     
@@ -38,7 +40,7 @@ class CurrencyDetailsViewController: UIViewController {
         return stackView
     }()
     
-    private let flagView = FlagCellView()
+    private let flagView = FlagView()
     
     private let codeLabel: UILabel = {
         let label = UILabel()
@@ -67,13 +69,29 @@ class CurrencyDetailsViewController: UIViewController {
         return label
     }()
     
-    private let percentageChangeView = PercentageChangeCellView()
+    private let percentageChangeView = PercentageChangeView()
+    
+    private let chartView: ChartView = ChartView()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .white
+        indicator.backgroundColor = .systemGray.withAlphaComponent(0.5)
+        indicator.layer.cornerRadius = 10
+        indicator.hidesWhenStopped = true
+        indicator.style = .medium
+        
+        return indicator
+    }()
     
     //MARK: - Init
     
-    init(viewModel: CurrencyViewModel) {
+    init(table: String, viewModel: CurrencyViewModel) {
         
         self.currencyViewModel = viewModel
+        
+        self.chartViewModel = CurrencyChartViewModel(table: table, code: viewModel.code)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -89,10 +107,9 @@ class CurrencyDetailsViewController: UIViewController {
         
         setupUI()
         setupActions()
-        
+        setupChartDelegate()
+        fetchChartData()
     }
-    
-    
 }
 
 //MARK: - SetupUI
@@ -102,7 +119,7 @@ extension CurrencyDetailsViewController {
     private func setupUI() {
         
         view.backgroundColor = Colors.appBackgound
-        view.addSubviews([navBackButton, infoStackView, valueLabel, percentageChangeView])
+        view.addSubviews([navBackButton, infoStackView, valueLabel, percentageChangeView, chartView, activityIndicator])
         infoStackView.addArrangedSubview(flagView)
         infoStackView.addArrangedSubview(codeLabel)
         infoStackView.addArrangedSubview(nameLabel)
@@ -127,6 +144,17 @@ extension CurrencyDetailsViewController {
             
             percentageChangeView.leadingAnchor.constraint(equalToSystemSpacingAfter: valueLabel.trailingAnchor, multiplier: 2),
             percentageChangeView.centerYAnchor.constraint(equalTo: valueLabel.centerYAnchor),
+  
+            chartView.topAnchor.constraint(equalToSystemSpacingBelow: percentageChangeView.bottomAnchor, multiplier: 2),
+            chartView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 2),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: chartView.trailingAnchor, multiplier: 2),
+            chartView.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: chartView.bottomAnchor, multiplier: 2),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: chartView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: chartView.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 50),
+            activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor),
             
         ])
         
@@ -148,6 +176,41 @@ extension CurrencyDetailsViewController {
         
         percentageChangeView.setupPercentageChange(value: viewModel.percentChange ?? 0)
     }
+
+    private func fetchChartData() {
+
+        chartViewModel.fetchChartData { [weak self] completion in
+
+
+            DispatchQueue.main.async {
+                self?.activityIndicator.startAnimating()
+                
+            }
+            
+            guard let chartViewModel = self?.chartViewModel else {
+                return
+            }
+            
+            if completion {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    
+                    self?.activityIndicator.stopAnimating()
+                    self?.chartView.configureChartData(with: chartViewModel)
+                    
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    
+                    self?.activityIndicator.stopAnimating()
+                    
+                    self?.chartView.configureChartData(with: chartViewModel)
+                    self?.chartView.lineChart.data = nil
+                    self?.chartView.lineChart.noDataText = "Nie udało się pobrać danych"
+                }
+            }
+        }
+    }
     
 }
 
@@ -155,17 +218,78 @@ extension CurrencyDetailsViewController {
 
 extension CurrencyDetailsViewController {
     
-    func setupActions() {
+    private func resetAndFetchChartData(count: TopCount) {
+        
+        percentageChangeView.setupPercentageChange(value: currencyViewModel.percentChange ?? 0)
+        
+        chartViewModel.count = count
+        chartViewModel.values = []
+        chartView.lineChart.data = nil
+        fetchChartData()
+    }
+    
+    private func setupActions() {
         
         navBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
+        let last7 = UIAction(title: "Ostatnie 7 ") {  [weak self] _ in
+            self?.chartView.daysButton.setTitle("Ostatnie 7 ", for: .normal)
+            
+            self?.resetAndFetchChartData(count: .last7)
+            
+        }
+        
+        let last30 = UIAction(title: "Ostatnie 30 ") {  [weak self] _ in
+            self?.chartView.daysButton.setTitle("Ostatnie 30 ", for: .normal)
+            
+            self?.resetAndFetchChartData(count: .last30)
+            
+        }
+        
+        let last90 = UIAction(title: "Ostatnie 90 ") {  [weak self] _ in
+            self?.chartView.daysButton.setTitle("Ostatnie 90 ", for: .normal)
+            
+            self?.resetAndFetchChartData(count: .last90)
+            
+        }
+        
+        let last180 = UIAction(title: "Ostatnie 180 ") {  [weak self] _ in
+            self?.chartView.daysButton.setTitle("Ostatnie 180 ", for: .normal)
+            
+            self?.resetAndFetchChartData(count: .last180)
+        }
+        
+        let menu = UIMenu(children: [last7, last30, last90, last180])
+        
+        chartView.daysButton.menu = menu
+        chartView.daysButton.showsMenuAsPrimaryAction = true
     }
     
-    @objc func goBack() {
+    @objc private func goBack() {
         
         navigationController?.popViewController(animated: true)
         
     }
-    
 }
 
+
+//MARK: - ChartDelegate
+
+extension CurrencyDetailsViewController: ChartViewDelegate {
+    
+    func setupChartDelegate() {
+        chartView.lineChart.delegate = self
+    }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        
+        let selectedValue = entry.y
+        let currentValue = currencyViewModel.value
+
+        let percentChange = Double().calculatePercentChange(current: currentValue, past: selectedValue)
+        
+        percentageChangeView.setupPercentageChange(value: percentChange)
+        
+    }
+    
+}
