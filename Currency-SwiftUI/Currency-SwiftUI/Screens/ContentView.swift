@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var searchText: String = ""
+    
     private let tables = ["A", "B"]
     @State var selectedTable: String = "A"
     
@@ -18,9 +20,25 @@ struct ContentView: View {
             Color.appBackgound
                 .ignoresSafeArea()
     
+            VStack {
+                Picker("Table picker", selection: $selectedTable) {
+                    ForEach(tables, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .padding()
+                .pickerStyle(.segmented)
+                
+                SearchTextFieldView(searchText: $searchText)
+                    .padding(.horizontal)
+                
+                Spacer()
+            }
             
-        }
+            
 
+        }
+        .preferredColorScheme(.dark)
     }
 
 }
