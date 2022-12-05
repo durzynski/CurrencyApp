@@ -23,7 +23,7 @@ struct K  {
 }
 
 enum Icons {
-    static let searchIcon = Image(systemName: "magnifyingglass")
+    static let searchIcon = "magnifyingglass"
 }
 
 extension Color {
