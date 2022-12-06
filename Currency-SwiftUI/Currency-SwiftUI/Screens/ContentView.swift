@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var viewModel = CurrencyListViewModel()
+    
     @State private var searchText: String = ""
     
     private let tables = ["A", "B"]
@@ -34,7 +36,13 @@ struct ContentView: View {
                 
                 Spacer()
             }
-            
+            .task {
+                do {
+                    try await viewModel.fetchPastCurrenciesForTable(table: selectedTable, daysAgoCount: 7)
+                } catch {
+                    print(error)
+                }
+            }
             
 
         }
