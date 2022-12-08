@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchTextFieldView: View {
     
     @Binding var searchText: String
+    var viewModel: CurrencyListViewModel
     
     var body: some View {
         
@@ -25,6 +26,30 @@ struct SearchTextFieldView: View {
                 
                 TextField("Szukaj walut", text: $searchText)
                     .padding(.trailing, 20)
+                    .onSubmit {
+                        searchText = ""
+                        viewModel.isSearching = false
+                    }
+                    .onChange(of: searchText) { _ in
+                        
+                        if searchText != "" {
+                            viewModel.isSearching = true
+                        }
+                        
+                        viewModel.filteredCurrencies = viewModel.currencies.filter({ result in
+                            
+                            let withCode = result.code.lowercased().contains(searchText.lowercased().trimmingCharacters(in: .whitespaces))
+                            
+                            let withName = result.name.lowercased().contains(searchText.lowercased().trimmingCharacters(in: .whitespaces))
+
+                            if withCode != false {
+                                return withCode
+                            } else {
+                                return withName
+                            }
+                        })
+                    }
+                    
                 
             }
             .background(Color.appSecondaryBackground).clipShape(RoundedRectangle(cornerRadius: 16))
@@ -34,6 +59,7 @@ struct SearchTextFieldView: View {
 
 struct SearchTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchTextFieldView(searchText: .constant(""))
+        SearchTextFieldView(searchText: .constant(""), viewModel: CurrencyListViewModel())
+            .preferredColorScheme(.dark)
     }
 }

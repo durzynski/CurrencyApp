@@ -10,8 +10,16 @@ import SwiftUI
 class CurrencyListViewModel: ObservableObject {
     
     @Published var currencies = [CurrencyViewModel]()
+    @Published var filteredCurrencies = [CurrencyViewModel]()
+    
+    @Published var isFetching: Bool = false
+    var isSearching: Bool = false
     
     public func fetchPastCurrenciesForTable(table: String, daysAgoCount: Int) async throws {
+        
+        DispatchQueue.main.async {
+            self.isFetching = true
+        }
         
         let currenciesResponse = try await APIManager.shared.fetchCurrenciesForTable(table: table, daysAgoCount: daysAgoCount)
         
@@ -38,6 +46,7 @@ class CurrencyListViewModel: ObservableObject {
                 index += 1
             })
             
+            self.isFetching = false
             self.currencies = currentCurrencyData
         }
         
@@ -69,10 +78,8 @@ class CurrencyViewModel {
         
         let lowercased = currency.code.lowercased()
         let dropLast = lowercased.dropLast()
-        let svg = dropLast + ".svg"
         
-        return String(svg)
-        
+        return String(dropLast)
     }
     
     var percentChange: Double?
