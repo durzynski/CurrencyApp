@@ -44,18 +44,18 @@ struct CurrencyView: View {
                     .lineLimit(1)
                     .multilineTextAlignment(.trailing)
                     .padding(.trailing, 5)
-                    
+                
             }
-            
         }
         .frame(height: 100)
         .background(Color.appBackgound)
-        .preferredColorScheme(.dark)
+
     }
 }
 
 struct CurrencyView_Previews: PreviewProvider {
     static var previews: some View {
         CurrencyView(viewModel: CurrencyViewModel(currency: Rate(currency: "Dolar amerykański", code: "USD", mid: 4.55555)))
+            .preferredColorScheme(.dark)
     }
 }

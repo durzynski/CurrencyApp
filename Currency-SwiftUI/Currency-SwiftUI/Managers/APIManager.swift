@@ -50,4 +50,32 @@ class APIManager {
         
     }
     
+    public func fetchChartData(table: String, code: String, daysCount: Int) async throws -> ChartResponse {
+        
+        let urlString = K.urlForCurrencyRates + table + "/" + code + "/last/" + "\(daysCount)"
+        
+        guard let url = URL(string: urlString) else {
+            throw APIError.urlError
+        }
+        
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 30
+        let session = URLSession(configuration: config)
+        
+        let (data, response) = try await session.data(from: url)
+        
+        let statusCode = (response as? HTTPURLResponse)?.statusCode
+        
+        guard statusCode == 200 else {
+            throw APIError.wrongResponse
+        }
+        
+        guard let object = try? JSONDecoder().decode(ChartResponse.self, from: data) else {
+            throw APIError.decodingError
+        }
+        
+        return object
+        
+    }
+    
 }

@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		AEC63896293FAB73001A7590 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC63895293FAB73001A7590 /* FlagView.swift */; };
 		AEC638982942743C001A7590 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638972942743C001A7590 /* ShimmerView.swift */; };
+		AEC6389A2942E436001A7590 /* DetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638992942E436001A7590 /* DetailsScreen.swift */; };
+		AEC6389C2942E684001A7590 /* CurrencyChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6389B2942E684001A7590 /* CurrencyChartViewModel.swift */; };
+		AEC6389E2942E6FD001A7590 /* ChartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC6389D2942E6FD001A7590 /* ChartResponse.swift */; };
+		AEC638A22943285F001A7590 /* NavBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638A12943285F001A7590 /* NavBackView.swift */; };
+		AEC638A429432B97001A7590 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638A329432B97001A7590 /* String+Extensions.swift */; };
+		AEC638A82943378F001A7590 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638A72943378F001A7590 /* ChartView.swift */; };
+		AEC638AA29492C24001A7590 /* ChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC638A929492C24001A7590 /* ChartModel.swift */; };
+		AED05B84294A033F002C5CD0 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED05B83294A033F002C5CD0 /* AnnotationView.swift */; };
 		AEF70E5D293E4C1E00003E64 /* Currency_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF70E5C293E4C1E00003E64 /* Currency_SwiftUIApp.swift */; };
 		AEF70E5F293E4C1E00003E64 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF70E5E293E4C1E00003E64 /* ContentView.swift */; };
 		AEF70E61293E4C1F00003E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEF70E60293E4C1F00003E64 /* Assets.xcassets */; };
@@ -26,6 +34,14 @@
 /* Begin PBXFileReference section */
 		AEC63895293FAB73001A7590 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
 		AEC638972942743C001A7590 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		AEC638992942E436001A7590 /* DetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreen.swift; sourceTree = "<group>"; };
+		AEC6389B2942E684001A7590 /* CurrencyChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChartViewModel.swift; sourceTree = "<group>"; };
+		AEC6389D2942E6FD001A7590 /* ChartResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartResponse.swift; sourceTree = "<group>"; };
+		AEC638A12943285F001A7590 /* NavBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBackView.swift; sourceTree = "<group>"; };
+		AEC638A329432B97001A7590 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		AEC638A72943378F001A7590 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		AEC638A929492C24001A7590 /* ChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartModel.swift; sourceTree = "<group>"; };
+		AED05B83294A033F002C5CD0 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		AEF70E59293E4C1E00003E64 /* Currency-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Currency-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEF70E5C293E4C1E00003E64 /* Currency_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency_SwiftUIApp.swift; sourceTree = "<group>"; };
 		AEF70E5E293E4C1E00003E64 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,8 +123,11 @@
 				AEF70E75293E533900003E64 /* SearchTextFieldView.swift */,
 				AEF70E7F293F9CCE00003E64 /* CurrencyView.swift */,
 				AEC638972942743C001A7590 /* ShimmerView.swift */,
+				AEC638A72943378F001A7590 /* ChartView.swift */,
+				AED05B83294A033F002C5CD0 /* AnnotationView.swift */,
 				AEF70E81293F9EEA00003E64 /* PercentageChangeView.swift */,
 				AEC63895293FAB73001A7590 /* FlagView.swift */,
+				AEC638A12943285F001A7590 /* NavBackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF70E5E293E4C1E00003E64 /* ContentView.swift */,
+				AEC638992942E436001A7590 /* DetailsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -125,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF70E7B293F989C00003E64 /* CurrencyListViewModel.swift */,
+				AEC6389B2942E684001A7590 /* CurrencyChartViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -133,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				AEF70E79293F95B300003E64 /* ExchangeRatesTable.swift */,
+				AEC6389D2942E6FD001A7590 /* ChartResponse.swift */,
+				AEC638A929492C24001A7590 /* ChartModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF70E7D293F9A2200003E64 /* Double+Extensions.swift */,
+				AEC638A329432B97001A7590 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -228,13 +252,21 @@
 				AEF70E5F293E4C1E00003E64 /* ContentView.swift in Sources */,
 				AEF70E82293F9EEA00003E64 /* PercentageChangeView.swift in Sources */,
 				AEF70E7A293F95B300003E64 /* ExchangeRatesTable.swift in Sources */,
+				AEC638A82943378F001A7590 /* ChartView.swift in Sources */,
+				AEC6389E2942E6FD001A7590 /* ChartResponse.swift in Sources */,
+				AEC6389A2942E436001A7590 /* DetailsScreen.swift in Sources */,
+				AEC638AA29492C24001A7590 /* ChartModel.swift in Sources */,
 				AEF70E5D293E4C1E00003E64 /* Currency_SwiftUIApp.swift in Sources */,
 				AEF70E78293F953100003E64 /* APIManager.swift in Sources */,
 				AEC63896293FAB73001A7590 /* FlagView.swift in Sources */,
 				AEF70E76293E533900003E64 /* SearchTextFieldView.swift in Sources */,
+				AEC6389C2942E684001A7590 /* CurrencyChartViewModel.swift in Sources */,
+				AEC638A429432B97001A7590 /* String+Extensions.swift in Sources */,
 				AEF70E72293E4E3D00003E64 /* Constants.swift in Sources */,
 				AEF70E80293F9CCE00003E64 /* CurrencyView.swift in Sources */,
+				AED05B84294A033F002C5CD0 /* AnnotationView.swift in Sources */,
 				AEF70E7C293F989C00003E64 /* CurrencyListViewModel.swift in Sources */,
+				AEC638A22943285F001A7590 /* NavBackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

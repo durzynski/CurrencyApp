@@ -17,7 +17,7 @@ struct ContentView: View {
     @State var selectedTable: String = "A"
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 
                 Color.appBackgound
@@ -31,13 +31,8 @@ struct ContentView: View {
                         .onChange(of: selectedTable) { table in
                             
                             Task {
-                                do {
-                                    try await viewModel.fetchPastCurrenciesForTable(table: selectedTable, daysAgoCount: 7)
-                                } catch {
-                                    print(error)
-                                }
+                                await fetchData()
                             }
-                            
                         }
                     }
                     .padding()
@@ -48,36 +43,25 @@ struct ContentView: View {
                     
                     List {
                         
-                        if viewModel.isFetching {
+                        if viewModel.currencies.count == 0 {
                             
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            ShimmerView()
-                                .listRowInsets(EdgeInsets())
-                            
-                            
+                            ForEach(0..<7) { index in
+                                ShimmerView()
+                                    .listRowInsets(EdgeInsets())
+                            }
                         } else {
                             ForEach(viewModel.isSearching ? viewModel.filteredCurrencies : viewModel.currencies, id: \.code) { currency in
                                 
-                                if viewModel.isFetching {
-                                    
-                                } else {
+                                ZStack {
+                                    NavigationLink(destination: DetailsScreen(table: selectedTable, viewModel: currency)) {
+                                        EmptyView()
+                                    }
+        
                                     CurrencyView(viewModel: currency)
-                                        .listRowInsets(EdgeInsets())
+                                        
                                 }
+                                .listRowInsets(EdgeInsets())
+
                             }
                         }
                     }
@@ -87,18 +71,23 @@ struct ContentView: View {
                             ProgressView()
                                 .scaleEffect(1.5)
                         }
-                        
                     }
                 }
                 .task {
-                    do {
-                        try await viewModel.fetchPastCurrenciesForTable(table: selectedTable, daysAgoCount: 7)
-                    } catch {
-                        
-                        print(error)
+                    
+                    if viewModel.currencies.count == 0 {
+                        await fetchData()
                     }
                 }
             }
+        }
+    }
+    
+    func fetchData() async {
+        do {
+            try await viewModel.fetchPastCurrenciesForTable(table: selectedTable, daysAgoCount: 7)
+        } catch {
+            print(error)
         }
     }
 }
