@@ -53,9 +53,6 @@ class CurrencyChartViewModel {
                 print(error)
                 completion(false)
             }
-            
         }
-        
     }
-
 }

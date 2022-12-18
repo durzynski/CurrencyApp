@@ -24,7 +24,7 @@ class CurrencyDetailsViewController: UIViewController {
         
         let button = UIButton(configuration: conf)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        button.setImage(Icons.arrowLeft, for: .normal)
         
         return button
     }()
@@ -32,8 +32,8 @@ class CurrencyDetailsViewController: UIViewController {
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = 12
-        stackView.distribution = .fill
+        stackView.spacing = 16
+        stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.alignment = .center
         
@@ -84,6 +84,8 @@ class CurrencyDetailsViewController: UIViewController {
         
         return indicator
     }()
+    
+    let chartMarkerView = CustomMarkerView()
     
     //MARK: - Init
     
@@ -136,10 +138,10 @@ extension CurrencyDetailsViewController {
             navBackButton.heightAnchor.constraint(equalToConstant: 60),
             navBackButton.widthAnchor.constraint(equalTo: navBackButton.heightAnchor),
             
-            infoStackView.topAnchor.constraint(equalToSystemSpacingBelow: navBackButton.bottomAnchor, multiplier: 4),
+            infoStackView.topAnchor.constraint(equalToSystemSpacingBelow: navBackButton.bottomAnchor, multiplier: 2),
             infoStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            valueLabel.topAnchor.constraint(equalToSystemSpacingBelow: infoStackView.bottomAnchor, multiplier: 6),
+            valueLabel.topAnchor.constraint(equalToSystemSpacingBelow: infoStackView.bottomAnchor, multiplier: 4),
             valueLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 2),
             
             percentageChangeView.leadingAnchor.constraint(equalToSystemSpacingAfter: valueLabel.trailingAnchor, multiplier: 2),
@@ -148,8 +150,7 @@ extension CurrencyDetailsViewController {
             chartView.topAnchor.constraint(equalToSystemSpacingBelow: percentageChangeView.bottomAnchor, multiplier: 2),
             chartView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 2),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: chartView.trailingAnchor, multiplier: 2),
-            chartView.heightAnchor.constraint(lessThanOrEqualToConstant: 300),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: chartView.bottomAnchor, multiplier: 2),
+            chartView.heightAnchor.constraint(equalToConstant: 300),
             
             activityIndicator.centerXAnchor.constraint(equalTo: chartView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: chartView.centerYAnchor),
@@ -166,7 +167,7 @@ extension CurrencyDetailsViewController {
         codeLabel.text = viewModel.code
         nameLabel.text = viewModel.name
         
-        let valueString = String(viewModel.value.roundToFourDecimalPlaces()) + " PLN"
+        let valueString = String(viewModel.value.roundToFourDecimalPlaces()) + " \(K.polishCurrency)"
         let range = NSRange(location: valueString.count - 3, length: 3)
         
         let attributedString = NSMutableAttributedString(string: valueString)
@@ -206,12 +207,11 @@ extension CurrencyDetailsViewController {
                     
                     self?.chartView.configureChartData(with: chartViewModel)
                     self?.chartView.lineChart.data = nil
-                    self?.chartView.lineChart.noDataText = "Nie udało się pobrać danych"
+                    self?.chartView.lineChart.noDataText = K.chartNoDataText
                 }
             }
         }
     }
-    
 }
 
 //MARK: - Actions
@@ -232,31 +232,31 @@ extension CurrencyDetailsViewController {
         
         navBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
-        let last7 = UIAction(title: "Ostatnie 7 ") {  [weak self] _ in
-            self?.chartView.daysButton.setTitle("Ostatnie 7 ", for: .normal)
+        let last7 = UIAction(title: K.last7) { _ in
+            self.chartView.daysButton.setTitle(K.last7, for: .normal)
             
-            self?.resetAndFetchChartData(count: .last7)
-            
-        }
-        
-        let last30 = UIAction(title: "Ostatnie 30 ") {  [weak self] _ in
-            self?.chartView.daysButton.setTitle("Ostatnie 30 ", for: .normal)
-            
-            self?.resetAndFetchChartData(count: .last30)
+            self.resetAndFetchChartData(count: .last7)
             
         }
         
-        let last90 = UIAction(title: "Ostatnie 90 ") {  [weak self] _ in
-            self?.chartView.daysButton.setTitle("Ostatnie 90 ", for: .normal)
+        let last30 = UIAction(title: K.last30) { _ in
+            self.chartView.daysButton.setTitle(K.last30, for: .normal)
             
-            self?.resetAndFetchChartData(count: .last90)
+            self.resetAndFetchChartData(count: .last30)
             
         }
         
-        let last180 = UIAction(title: "Ostatnie 180 ") {  [weak self] _ in
-            self?.chartView.daysButton.setTitle("Ostatnie 180 ", for: .normal)
+        let last90 = UIAction(title: K.last90) { _ in
+            self.chartView.daysButton.setTitle(K.last90, for: .normal)
             
-            self?.resetAndFetchChartData(count: .last180)
+            self.resetAndFetchChartData(count: .last90)
+            
+        }
+        
+        let last180 = UIAction(title: K.last180) { _ in
+            self.chartView.daysButton.setTitle(K.last180, for: .normal)
+            
+            self.resetAndFetchChartData(count: .last180)
         }
         
         let menu = UIMenu(children: [last7, last30, last90, last180])
@@ -282,14 +282,12 @@ extension CurrencyDetailsViewController: ChartViewDelegate {
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
-        let selectedValue = entry.y
-        let currentValue = currencyViewModel.value
 
-        let percentChange = Double().calculatePercentChange(current: currentValue, past: selectedValue)
+        let value = entry.y
+        let date = chartViewModel.dates[Int(entry.x)]
         
-        percentageChangeView.setupPercentageChange(value: percentChange)
-        
+        self.chartView.marker.valueLabel.text = String(value.roundToFourDecimalPlaces())
+        self.chartView.marker.dateLabel.text = date
+
     }
-    
 }

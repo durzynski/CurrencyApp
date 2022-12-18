@@ -8,14 +8,10 @@
 import Foundation
 
 struct Chart: Codable {
-    
     let rates: [ChartData]
-    
 }
 
 struct ChartData: Codable {
-    
     let effectiveDate: String
     let mid: Double
-    
 }

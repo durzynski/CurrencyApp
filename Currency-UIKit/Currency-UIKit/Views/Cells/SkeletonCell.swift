@@ -27,7 +27,6 @@ class SkeletonCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.spacing = 8
         
-        
         return stackView
     }()
     
@@ -73,7 +72,6 @@ class SkeletonCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
         setupUI()
     }
     
@@ -96,7 +94,6 @@ class SkeletonCell: UITableViewCell {
         percentageViewLayer.frame = percentageChangeView.bounds
         percentageViewLayer.cornerRadius = percentageChangeView.bounds.height / 2
     }
-    
 }
 
 //MARK: - Setup UI
@@ -145,7 +142,6 @@ extension SkeletonCell {
         labelStackView.addArrangedSubview(codeLabel)
         labelStackView.addArrangedSubview(nameLabel)
         
-        
         setupConstraints()
     }
     
@@ -180,14 +176,14 @@ extension SkeletonCell {
     func makeAnimationGroup(previousGroup: CAAnimationGroup? = nil) -> CAAnimationGroup {
         let animDuration: CFTimeInterval = 1
         let anim1 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
-        anim1.fromValue = UIColor.gradientLightGrey.cgColor
+        anim1.fromValue = Colors.gradientLightGrey.cgColor
         anim1.toValue = UIColor.systemGray.cgColor
         anim1.duration = animDuration
         anim1.beginTime = 0.0
         
         let anim2 = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.backgroundColor))
         anim2.fromValue = UIColor.systemGray.cgColor
-        anim2.toValue = UIColor.gradientLightGrey.cgColor
+        anim2.toValue = Colors.gradientLightGrey.cgColor
         anim2.duration = animDuration
         anim2.beginTime = anim1.beginTime + anim1.duration
         
@@ -200,20 +196,7 @@ extension SkeletonCell {
         if let previousGroup = previousGroup {
             group.beginTime = previousGroup.beginTime + 0.33
         }
-        
+    
         return group
     }
-    
 }
-
-
-extension UIColor {
-    static var gradientDarkGrey: UIColor {
-        return UIColor(red: 239 / 255.0, green: 241 / 255.0, blue: 241 / 255.0, alpha: 1)
-    }
-
-    static var gradientLightGrey: UIColor {
-        return UIColor(red: 201 / 255.0, green: 201 / 255.0, blue: 201 / 255.0, alpha: 1)
-    }
-}
-

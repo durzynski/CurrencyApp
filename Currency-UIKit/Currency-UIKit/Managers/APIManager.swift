@@ -8,10 +8,7 @@
 import Foundation
 
 enum APIError: Error {
-    case decodingError
-    case urlError
-    case wrongResponse
-    case noData
+    case decodingError, urlError, wrongResponse, noData
 }
 
 struct APIManager {
@@ -61,11 +58,8 @@ struct APIManager {
                     return
                 }
             }
-            
         }
-        
         task.resume()
-        
     }
     
     public func fetchChartData(table: String, code: String, daysCount: Int, completion: @escaping (Result<Chart, APIError>) -> Void) {

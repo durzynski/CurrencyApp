@@ -9,8 +9,6 @@ import Foundation
 
 class CurrencyListViewModel {
     
-    var currencyTable: [ExchangeRatesTable] = []
-    
     var currencies: [CurrencyViewModel] = []
     var filteredCurrencies: [CurrencyViewModel] = []
     
@@ -19,13 +17,11 @@ class CurrencyListViewModel {
     
     func fetchPastCurrenciesForTable(table: String, daysAgoCount: Int, completion: @escaping ([CurrencyViewModel]?) -> Void) {
         
-        APIManager.shared.fetchCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { [weak self] result in
+        APIManager.shared.fetchCurrenciesForTable(table: table, daysAgoCount: daysAgoCount) { result in
             
             switch result {
                 
             case .success(let table):
-                
-                self?.currencyTable = table
                 
                 var pastCurrencyData: [CurrencyViewModel] = []
                 var currentCurrencyData: [CurrencyViewModel] = []
@@ -57,9 +53,6 @@ class CurrencyListViewModel {
             }
         }
     }
-    
-
-    
 }
 
 class CurrencyViewModel {
@@ -93,5 +86,4 @@ class CurrencyViewModel {
     }
     
     var percentChange: Double?
-    
 }

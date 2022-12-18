@@ -31,5 +31,4 @@ extension Double {
         
         return percentChange
     }
-
 }

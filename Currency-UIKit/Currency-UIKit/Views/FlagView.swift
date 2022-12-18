@@ -78,13 +78,11 @@ extension FlagView {
             flagImageView.heightAnchor.constraint(equalToConstant: 30),
             flagImageView.widthAnchor.constraint(equalTo: flagImageView.heightAnchor),
         ])
-        
     }
     
     public func setupFlagImage(flagName: String) {
         
         flagImageView.image = UIImage(named: flagName) ?? UIImage()
     }
-    
 }
 

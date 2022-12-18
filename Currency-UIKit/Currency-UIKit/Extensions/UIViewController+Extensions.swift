@@ -11,9 +11,9 @@ extension UIViewController {
     func presentErrorAlert(fetchAgain: @escaping () -> Void) {
         
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Coś poszło nie tak", message: "Sprawdź swoje połączenie internetowe", preferredStyle: .alert)
+            let alert = UIAlertController(title: K.errorTitle, message: K.errorMessage, preferredStyle: .alert)
 
-            alert.addAction(UIAlertAction(title: "Spróbuj ponownie", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: K.errorButtonTitle, style: .default, handler: { _ in
                 fetchAgain()
             }))
             

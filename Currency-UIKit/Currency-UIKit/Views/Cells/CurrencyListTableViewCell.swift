@@ -33,7 +33,6 @@ class CurrencyListTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         
-        
         return label
     }()
     
@@ -65,16 +64,12 @@ class CurrencyListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        
         setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    
 }
 
 //MARK: - Setup UI
@@ -88,7 +83,6 @@ extension CurrencyListTableViewCell {
         
         labelStackView.addArrangedSubview(codeLabel)
         labelStackView.addArrangedSubview(nameLabel)
-        
         
         setupConstraints()
     }
@@ -110,9 +104,7 @@ extension CurrencyListTableViewCell {
             percentageChangeView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             valueLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: percentageChangeView.trailingAnchor, multiplier: 2),
             
-            
         ])
-        
     }
     
     
@@ -127,5 +119,4 @@ extension CurrencyListTableViewCell {
         percentageChangeView.setupPercentageChange(value: viewModel.percentChange ?? 0)
         
     }
-    
 }

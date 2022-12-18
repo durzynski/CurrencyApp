@@ -94,7 +94,6 @@ extension PercentageChangeView {
             containerView.trailingAnchor.constraint(equalToSystemSpacingAfter: percentageChangeStackView.trailingAnchor, multiplier: 1),
             containerView.bottomAnchor.constraint(equalToSystemSpacingBelow: percentageChangeStackView.bottomAnchor, multiplier: 1),
         ])
-        
     }
     
     public func setupPercentageChange(value: Double) {
@@ -103,7 +102,7 @@ extension PercentageChangeView {
             
             let color = UIColor.systemRed
             
-            arrowIconView.image = UIImage(systemName: "arrow.up")
+            arrowIconView.image = Icons.arrowUp
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
@@ -113,7 +112,7 @@ extension PercentageChangeView {
             
             let color = UIColor.systemGreen
             
-            arrowIconView.image = UIImage(systemName: "arrow.down")
+            arrowIconView.image = Icons.arrowDown
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
@@ -123,14 +122,12 @@ extension PercentageChangeView {
             
             let color = UIColor.systemGray
             
-            arrowIconView.image = UIImage(systemName: "equal")
+            arrowIconView.image = Icons.equal
             arrowIconView.tintColor = color
             containerView.layer.borderColor = color.cgColor
             containerView.backgroundColor = color.withAlphaComponent(0.1)
             percentageLabel.text = "0.0%"
             percentageLabel.textColor = color
         }
-        
     }
-    
 }
