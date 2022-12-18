@@ -10,8 +10,6 @@ import Charts
 
 class ChartView: UIView {
     
-    //MARK: - Properties
-    
     //MARK: - UI Elements
     
     let daysButton: UIButton = {
@@ -20,9 +18,9 @@ class ChartView: UIView {
         config.baseBackgroundColor = Colors.appBackgound
         config.baseForegroundColor = .white
         config.cornerStyle = .medium
-        config.image = UIImage(systemName: "arrowtriangle.down.fill")
+        config.image = Icons.arrowTriangleDownFill
         config.imagePlacement = .trailing
-        config.title = "Ostatnie 7 "
+        config.title = K.last7
         config.buttonSize = .small
         
         let button = UIButton(configuration: config)
@@ -39,6 +37,7 @@ class ChartView: UIView {
         chartView.setScaleEnabled(false)
         chartView.legend.enabled = false
         chartView.leftAxis.enabled = false
+        chartView.rightAxis.enabled = true
         chartView.xAxis.enabled = false
         chartView.noDataTextColor = Colors.neon ?? .white
         chartView.noDataFont = .systemFont(ofSize: 16, weight: .medium)
@@ -46,6 +45,8 @@ class ChartView: UIView {
         
         return chartView
     }()
+    
+    let marker = CustomMarkerView()
     
     //MARK: - Init
     
@@ -82,7 +83,6 @@ extension ChartView {
         NSLayoutConstraint.activate([
             daysButton.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             daysButton.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-
             
             lineChart.topAnchor.constraint(equalToSystemSpacingBelow: daysButton.bottomAnchor, multiplier: 1),
             lineChart.leadingAnchor.constraint(equalTo: daysButton.leadingAnchor),
@@ -101,12 +101,8 @@ extension ChartView {
                 .init(x: Double(index), y: value)
             )
         }
-        
-        lineChart.rightAxis.enabled = true
 
-        let marker: BalloonMarker = BalloonMarker(color: Colors.appBackgound ?? .black, font: .systemFont(ofSize: 14), textColor: .white, insets: UIEdgeInsets(top: 7.0, left: 7.0, bottom: 7.0, right: 7.0))
         marker.chartView = lineChart
-        marker.minimumSize = CGSize(width: 75.0, height: 50.0)
         lineChart.marker = marker
         lineChart.drawMarkers = true
         lineChart.animate(xAxisDuration: 0.35)
