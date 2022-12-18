@@ -14,7 +14,7 @@ struct NavBackView: View {
             .frame(width: 50, height: 50)
             .padding(.horizontal)
             .overlay(
-                Image(systemName: "arrow.left")
+                Image(systemName: Icons.arrowLeft)
                     .resizable()
                     .frame(width: 18, height: 15)
                     .font(.title)

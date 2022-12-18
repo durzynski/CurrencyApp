@@ -49,7 +49,7 @@ struct DetailsScreen: View {
                     .font(.system(size: 28, weight: .semibold))
                 +
                 
-                Text(" PLN")
+                Text(" \(K.polishCurrency)")
                     .foregroundColor(.neon)
                     .font(.system(size: 21))
                 

@@ -24,7 +24,7 @@ struct SearchTextFieldView: View {
                     .padding(.init(top: 20, leading: 20, bottom: 20, trailing: 5))
                     
                 
-                TextField("Szukaj walut", text: $searchText)
+                TextField(K.searchBarPlaceholder, text: $searchText)
                     .padding(.trailing, 20)
                     .onSubmit {
                         searchText = ""

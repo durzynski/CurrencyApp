@@ -120,7 +120,7 @@ struct ChartView: View {
                 .overlay {
                     AnnotationView(value: $selectedValue, date: $selectedDate)
                         .opacity(annotationHidden ? 0 : 1)
-                        .position(CGPoint(x: position.x, y: position.y - 40))
+                        .position(CGPoint(x: position.x, y: position.y))
                     
                     if viewModel.isFetching {
                         ProgressView()
@@ -146,6 +146,16 @@ struct ChartView: View {
         })?.value ?? 0
         
         position = location
+        position.y -= 70
+        
+        if position.x < 0 {
+            position.x = 0
+        }
+
+        if position.y < 0 {
+            position.y = 0
+        }
+        
         annotationHidden = false
     }
 }

@@ -16,6 +16,8 @@ struct ContentView: View {
     private let tables = ["A", "B"]
     @State var selectedTable: String = "A"
     
+    @State var errorAlertIsPresented: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -40,6 +42,17 @@ struct ContentView: View {
                     
                     SearchTextFieldView(searchText: $searchText, viewModel: viewModel)
                         .padding(.horizontal)
+                    
+                    
+                    HStack {
+                        Text(K.tableTitle)
+                            .font(.system(size: 24, weight: .semibold))
+                            .padding(.top)
+                            .padding(.horizontal)
+                            .padding(.bottom, -10)
+                        
+                        Spacer()
+                    }
                     
                     List {
                         
@@ -66,6 +79,10 @@ struct ContentView: View {
                         }
                     }
                     .listStyle(.plain)
+                    .background(Color.appBackgound)
+                    .refreshable {
+                        await fetchData()
+                    }
                     .overlay {
                         if viewModel.isFetching {
                             ProgressView()
@@ -80,14 +97,25 @@ struct ContentView: View {
                     }
                 }
             }
+            .alert(K.errorTitle, isPresented: $errorAlertIsPresented) {
+                Button(K.errorButtonTitle, role: .none) {
+                    
+                    Task {
+                        await fetchData()
+                    }
+                }
+            }
         }
     }
     
-    func fetchData() async {
+    private func fetchData() async {
         do {
             try await viewModel.fetchPastCurrenciesForTable(table: selectedTable, daysAgoCount: 7)
         } catch {
-            print(error)
+            
+            viewModel.isFetching = false
+            
+            errorAlertIsPresented = true
         }
     }
 }

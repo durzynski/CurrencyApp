@@ -13,11 +13,11 @@ struct PercentageChangeView: View {
     
     var image: String {
         if value < 0 {
-            return "arrow.up"
+            return Icons.arrowUp
         } else if value > 0 {
-            return "arrow.down"
+            return Icons.arrowDown
         } else {
-            return "equal"
+            return Icons.equal
         }
     }
     
